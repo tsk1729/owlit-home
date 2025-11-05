@@ -60,6 +60,26 @@
             }
         </style>
         <style data-framer-css-ssr-minified data-framer-components="framer-MTE0Q PropertyOverrides framer-3GulT framer-M718o framer-tBYTO framer-UnGn1 framer-OEGIQ">
+/* --- Owlit custom fix for Select Feature buttons vertical stacking in all modes --- */
+.framer-6xvd8v {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 20px !important;
+}
+/* --- Owlit: Mobile mode fix for Select Feature, target just the first two buttons --- */
+@media (max-width: 809px) {
+  .framer-6xvd8v > .framer-kixmo1-container,
+  .framer-6xvd8v > .framer-10g766c-container,
+  .framer-6xvd8v > .framer-kixmo1-container .framer-tBYTO,
+  .framer-6xvd8v > .framer-10g766c-container .framer-tBYTO {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    margin: 0 auto 10px auto !important;
+    display: block !important;
+  }
+}
             html,body,#main {
                 margin: 0;
                 padding: 0;
