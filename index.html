@@ -9,14 +9,49 @@
     <meta name="viewport" content="width=device-width">
     <title>Ecosystem for brands and creators</title>
     <script>
-        // Force title to verify "Ecosystem for brands and creators" despite external Framer scripts
+        // Force title and meta tags to verify "Ecosystem for brands and creators" despite external Framer scripts
         (function () {
             var desiredTitle = "Ecosystem for brands and creators";
-            new MutationObserver(function (mutations) {
+            var desiredDesc = "Owlit, your business partner in digital marketing. We provide affordable and intelligent marketing solutions to help your business grow.";
+
+            function enforceMetadata() {
                 if (document.title !== desiredTitle) {
                     document.title = desiredTitle;
                 }
-            }).observe(document.querySelector('title'), { childList: true, characterData: true, subtree: true });
+
+                var metas = {
+                    'description': desiredDesc,
+                    'og:title': desiredTitle,
+                    'og:description': desiredDesc,
+                    'twitter:title': desiredTitle,
+                    'twitter:description': desiredDesc
+                };
+
+                for (var key in metas) {
+                    // Check name first, then property
+                    var el = document.querySelector('meta[name="' + key + '"]') || document.querySelector('meta[property="' + key + '"]');
+                    if (el && el.getAttribute('content') !== metas[key]) {
+                        el.setAttribute('content', metas[key]);
+                    }
+                }
+
+                // Remove or clear images if they point to framer assets, or force to our preview
+                var imageKeys = ['og:image', 'twitter:image'];
+                var desiredImage = "https://www.owlit.in/preview.jpg";
+                imageKeys.forEach(function (key) {
+                    var el = document.querySelector('meta[name="' + key + '"]') || document.querySelector('meta[property="' + key + '"]');
+                    if (el && el.getAttribute('content') !== desiredImage) {
+                        el.setAttribute('content', desiredImage);
+                    }
+                });
+            }
+
+            new MutationObserver(function (mutations) {
+                enforceMetadata();
+            }).observe(document.head, { childList: true, attributes: true, subtree: true, characterData: true });
+
+            // Run immediately
+            enforceMetadata();
         })();
     </script>
     <meta name="description"
@@ -28,13 +63,13 @@
     <meta property="og:title" content="Ecosystem for brands and creators">
     <meta property="og:description"
         content="Owlit, your business partner in digital marketing. We provide affordable and intelligent marketing solutions to help your business grow.">
-    <meta property="og:image" content="https://framerusercontent.com/images/dIWI8EpGIpYMYnF8VAPPWR6ENfg.png">
+    <meta property="og:image" content="https://www.owlit.in/preview.jpg">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ecosystem for brands and creators">
     <meta name="twitter:description"
         content="Owlit, your business partner in digital marketing. We provide affordable and intelligent marketing solutions to help your business grow.">
-    <meta name="twitter:image" content="https://framerusercontent.com/images/dIWI8EpGIpYMYnF8VAPPWR6ENfg.png">
+    <meta name="twitter:image" content="https://www.owlit.in/preview.jpg">
     <style data-framer-font-css>
         /* vietnamese */
         @font-face {
@@ -5870,48 +5905,6 @@
                                         </div>
                                     </div>
                                     <!--/$-->
-                                </div>
-                            </div>
-                            <div class="ssr-variant hidden-1fo30kr hidden-1jefp95">
-                                <div class="framer-58spfw" data-framer-name="ImageChange">
-                                    <div style="position:absolute;border-radius:inherit;top:0;right:0;bottom:0;left:0"
-                                        data-framer-background-image-wrapper="true">
-                                        <img decoding="async" loading="lazy" width="1024" height="1024"
-                                            sizes="(min-width: 1200px) max((min(max(100vw - 60px, 1px), 1224px) - 112px) / 2, 1px), (max-width: 809.98px) calc(min(max(100vw - 40px, 1px), 390px) - 48px), (min-width: 810px) and (max-width: 1199.98px) calc(min(max(100vw - 60px, 1px), 768px) - 128px)"
-                                            srcset="https://framerusercontent.com/images/Td5rVrtMzbWxxrhbSMewntrw.png?scale-down-to=512&amp;width=1024&amp;height=1024 512w,https://framerusercontent.com/images/Td5rVrtMzbWxxrhbSMewntrw.png?width=1024&amp;height=1024 1024w"
-                                            src="https://framerusercontent.com/images/Td5rVrtMzbWxxrhbSMewntrw.png?width=1024&amp;height=1024"
-                                            alt="UX Designer"
-                                            style="display:block;width:100%;height:100%;border-radius:inherit;object-position:center;object-fit:cover"
-                                            data-framer-original-sizes="max((min(max(100vw - 60px, 1px), 1224px) - 112px) / 2, 1px)">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ssr-variant hidden-stfy6l hidden-1jefp95">
-                                <div class="framer-58spfw" data-framer-name="ImageChange">
-                                    <div style="position:absolute;border-radius:inherit;top:0;right:0;bottom:0;left:0"
-                                        data-framer-background-image-wrapper="true">
-                                        <img decoding="async" loading="lazy" width="1024" height="1024"
-                                            sizes="(min-width: 1200px) max((min(max(100vw - 60px, 1px), 1224px) - 112px) / 2, 1px), (max-width: 809.98px) calc(min(max(100vw - 40px, 1px), 390px) - 48px), (min-width: 810px) and (max-width: 1199.98px) calc(min(max(100vw - 60px, 1px), 768px) - 128px)"
-                                            srcset="https://framerusercontent.com/images/Td5rVrtMzbWxxrhbSMewntrw.png?scale-down-to=512&amp;width=1024&amp;height=1024 512w,https://framerusercontent.com/images/Td5rVrtMzbWxxrhbSMewntrw.png?width=1024&amp;height=1024 1024w"
-                                            src="https://framerusercontent.com/images/Td5rVrtMzbWxxrhbSMewntrw.png?width=1024&amp;height=1024"
-                                            alt="UX Designer"
-                                            style="display:block;width:100%;height:100%;border-radius:inherit;object-position:center;object-fit:cover"
-                                            data-framer-original-sizes="calc(min(max(100vw - 40px, 1px), 390px) - 48px)">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ssr-variant hidden-stfy6l hidden-1fo30kr">
-                                <div class="framer-58spfw" data-framer-name="ImageChange">
-                                    <div style="position:absolute;border-radius:inherit;top:0;right:0;bottom:0;left:0"
-                                        data-framer-background-image-wrapper="true">
-                                        <img decoding="async" loading="lazy" width="1024" height="1024"
-                                            sizes="(min-width: 1200px) max((min(max(100vw - 60px, 1px), 1224px) - 112px) / 2, 1px), (max-width: 809.98px) calc(min(max(100vw - 40px, 1px), 390px) - 48px), (min-width: 810px) and (max-width: 1199.98px) calc(min(max(100vw - 60px, 1px), 768px) - 128px)"
-                                            srcset="https://framerusercontent.com/images/Td5rVrtMzbWxxrhbSMewntrw.png?scale-down-to=512&amp;width=1024&amp;height=1024 512w,https://framerusercontent.com/images/Td5rVrtMzbWxxrhbSMewntrw.png?width=1024&amp;height=1024 1024w"
-                                            src="https://framerusercontent.com/images/Td5rVrtMzbWxxrhbSMewntrw.png?width=1024&amp;height=1024"
-                                            alt="UX Designer"
-                                            style="display:block;width:100%;height:100%;border-radius:inherit;object-position:center;object-fit:cover"
-                                            data-framer-original-sizes="calc(min(max(100vw - 60px, 1px), 768px) - 128px)">
-                                    </div>
                                 </div>
                             </div>
                         </div>
