@@ -23,6 +23,7 @@
                     'description': desiredDesc,
                     'og:title': desiredTitle,
                     'og:description': desiredDesc,
+                    'og:site_name': 'Owlit',
                     'twitter:title': desiredTitle,
                     'twitter:description': desiredDesc
                 };
@@ -62,14 +63,58 @@
             enforceMetadata();
         })();
     </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Owlit",
+          "url": "https://www.owlit.in/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.owlit.in/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "ItemList",
+          "itemListElement": [
+            {
+              "@type": "SiteNavigationElement",
+              "position": 1,
+              "name": "AI Agents",
+              "description": "Revolutionize your reach with AI agents. The premier tool for brands and influencers to automate and optimize product marketing.",
+              "url": "https://home.owlit.in/login"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 2,
+              "name": "Marketplace",
+              "description": "Connect, Collaborate, Create. The central hub where top brands and influencers meet to build successful partnerships.",
+              "url": "https://market.owlit.in/login"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 3,
+              "name": "Download App",
+              "description": "Marketing in your pocket. Download the verified Android app for influencers and brands to manage campaigns anywhere.",
+              "url": "https://play.google.com/store/apps/details?id=com.owlit.app&hl=en-US"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
     <meta name="description"
         content="Owlit, your business partner in digital marketing. We provide affordable and intelligent marketing solutions to help your business grow.">
-    <link rel="icon" type="image/svg+xml" <link rel="icon" type="image/svg+xml"
+    <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' font-size='52'%3E%F0%9F%A6%89%3C/text%3E%3C/svg%3E">
     <meta itemprop="image" content="https://www.owlit.in/preview.jpg">
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Ecosystem for brands and creators">
+    <meta property="og:site_name" content="Owlit">
     <meta property="og:description"
         content="Owlit, your business partner in digital marketing. We provide affordable and intelligent marketing solutions to help your business grow.">
     <meta property="og:image" content="https://www.owlit.in/preview.jpg">
