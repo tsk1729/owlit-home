@@ -38,12 +38,20 @@
                 // Remove or clear images if they point to framer assets, or force to our preview
                 var imageKeys = ['og:image', 'twitter:image'];
                 var desiredImage = "https://www.owlit.in/preview.jpg";
+
+                // Handle meta names/properties
                 imageKeys.forEach(function (key) {
                     var el = document.querySelector('meta[name="' + key + '"]') || document.querySelector('meta[property="' + key + '"]');
                     if (el && el.getAttribute('content') !== desiredImage) {
                         el.setAttribute('content', desiredImage);
                     }
                 });
+
+                // Handle itemprop="image"
+                var itemPropEl = document.querySelector('meta[itemprop="image"]');
+                if (itemPropEl && itemPropEl.getAttribute('content') !== desiredImage) {
+                    itemPropEl.setAttribute('content', desiredImage);
+                }
             }
 
             new MutationObserver(function (mutations) {
@@ -56,8 +64,9 @@
     </script>
     <meta name="description"
         content="Owlit, your business partner in digital marketing. We provide affordable and intelligent marketing solutions to help your business grow.">
-    <link rel="icon" type="image/svg+xml"
+    <link rel="icon" type="image/svg+xml" <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' font-size='52'%3E%F0%9F%A6%89%3C/text%3E%3C/svg%3E">
+    <meta itemprop="image" content="https://www.owlit.in/preview.jpg">
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Ecosystem for brands and creators">
