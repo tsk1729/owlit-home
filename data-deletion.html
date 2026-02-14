@@ -1,53 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Owlit Data Deletion Instructions</title>
+    <title>Data Deletion</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            margin: 20px;
-        }
-        h1 {
             color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
         }
-        ul {
-            margin-top: 10px;
+
+        .container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
+        h1,
+        h2,
+        h3 {
+            color: #2c3e50;
+        }
+
         a {
-            color: #007bff;
+            color: #3498db;
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 15px;
+            color: #555;
+        }
+
+        .loading {
+            text-align: center;
+            color: #777;
+            font-size: 1.1em;
+        }
+
+        .error {
+            color: #e74c3c;
+            text-align: center;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
+
 <body>
-    <h1>Owlit Data Deletion Instructions</h1>
-    <p>
-        At Owlit, we respect your privacy and allow you to delete your data at any time. Follow these steps to remove your data from our platform:
-    </p>
-    <h2>1. Deauthorize Owlit from Instagram</h2>
-    <ul>
-        <li>Go to your Instagram settings.</li>
-        <li>Navigate to <strong>Apps and Websites</strong> under the <strong>Security</strong> section.</li>
-        <li>Find <strong>Owlit</strong> in the list of active apps.</li>
-        <li>Click <strong>Remove</strong> to deauthorize Owlit.</li>
-    </ul>
-    <h2>2. Data Deletion from Owlit</h2>
-    <ul>
-        <li>After deauthorizing, visit the Owlit app at <a href="https://home.owlit.in" target="_blank">https://home.owlit.in</a>.</li>
-        <li>Log in using your Google account.</li>
-        <li>Go to the <strong>Instagram</strong> section in the app.</li>
-        <li>Click on the <strong>Deauthorize</strong> button to delete all associated data (e.g., synced posts, metadata, tokens) from our system.</li>
-    </ul>
-    <h2>3. Track the Deletion Process (Optional)</h2>
-    <p>
-        If you need confirmation of your data deletion request, please contact our support team at
-        <a href="mailto:tsk1999@yahoo.com">support@owlit.in</a> for assistance.
-    </p>
+    <div class="container">
+        <div id="content">
+            <p class="loading">Loading latest content from Owlit...</p>
+        </div>
+    </div>
+    <div id="raw-content" style="display:none;"></div>
+    <script>
+        fetch('https://api.owlit.in/data_deletion')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const rawContent = doc.getElementById('raw-content');
+                if (rawContent && rawContent.textContent.trim()) {
+                    document.getElementById('content').innerHTML = marked.parse(rawContent.textContent);
+                } else {
+                    document.getElementById('content').innerHTML = '<p class="error">Could not load content. Please refresh the page.</p>';
+                    console.error('Could not find #raw-content in the fetched HTML');
+                }
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+                document.getElementById('content').innerHTML = `
+                    <div class="error">
+                        <p>Unable to load the latest "Data Deletion" information at this moment.</p>
+                        <p><small>Please check your connection or try again later.</small></p>
+                    </div>
+                `;
+            });
+    </script>
 </body>
+
 </html>
