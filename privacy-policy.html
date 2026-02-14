@@ -92,10 +92,17 @@
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
                 const rawContent = doc.getElementById('raw-content');
+
                 if (rawContent && rawContent.textContent.trim()) {
+                    // Case 1: HTML with #raw-content div (e.g. About Us) -> Render Markdown
                     document.getElementById('content').innerHTML = marked.parse(rawContent.textContent);
+                } else if (html.trim().toLowerCase().startsWith('<!doctype html') || html.trim().toLowerCase().startsWith('<html')) {
+                    // Case 2: Full HTML Document -> Use body content directly
+                    // Extract content between <body> tags to avoid nested html/body tags
+                    const bodyContent = doc.body.innerHTML;
+                    document.getElementById('content').innerHTML = bodyContent;
                 } else {
-                    // Fallback: Assume the fetched text is markdown directly
+                    // Case 3: Markdown or Plain Text -> Render Markdown
                     document.getElementById('content').innerHTML = marked.parse(html);
                 }
             })

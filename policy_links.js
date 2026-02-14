@@ -41,5 +41,26 @@
     window.addEventListener('load', injectLinks);
 
     // Periodic check to handle hydration overwrites
-    setInterval(injectLinks, 100);
+    setInterval(() => {
+        injectLinks();
+
+        // Fix unwanted LinkedIn links
+        document.querySelectorAll('a[href*="jarvinentoni"]').forEach(link => {
+            link.href = 'javascript:void(0)';
+            link.removeAttribute('target');
+            link.removeAttribute('rel');
+            link.style.pointerEvents = 'none'; // Optional: disable clicking entirely
+        });
+
+        // Fix mislabeled social links (Youtube/Twitter pointing to tsk1999)
+        document.querySelectorAll('a[href*="tsk1999"]').forEach(link => {
+            const text = link.innerText || link.textContent;
+            if (text.includes('Youtube') || text.includes('Twitter')) {
+                link.href = 'javascript:void(0)';
+                link.removeAttribute('target');
+                link.removeAttribute('rel');
+            }
+        });
+
+    }, 100);
 })();
