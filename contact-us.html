@@ -93,17 +93,18 @@
                 const doc = parser.parseFromString(html, 'text/html');
                 const rawContent = doc.getElementById('raw-content');
                 if (rawContent && rawContent.textContent.trim()) {
-                    // Ensure marked.js is available
                     if (typeof marked !== 'undefined') {
                         document.getElementById('content').innerHTML = marked.parse(rawContent.textContent);
                     } else {
-                        console.warn('marked.js not loaded, falling back to raw text');
-                        // Fallback if marked.js fails to load
                         document.getElementById('content').textContent = rawContent.textContent;
                     }
                 } else {
-                    document.getElementById('content').innerHTML = '<p class="error">Could not load content. Please refresh the page.</p>';
-                    console.error('Could not find #raw-content in the fetched HTML');
+                    // Fallback: Assume the fetched text is markdown directly
+                    if (typeof marked !== 'undefined') {
+                        document.getElementById('content').innerHTML = marked.parse(html);
+                    } else {
+                        document.getElementById('content').textContent = html;
+                    }
                 }
             })
             .catch(error => {

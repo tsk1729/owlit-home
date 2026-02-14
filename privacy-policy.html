@@ -95,8 +95,8 @@
                 if (rawContent && rawContent.textContent.trim()) {
                     document.getElementById('content').innerHTML = marked.parse(rawContent.textContent);
                 } else {
-                    document.getElementById('content').innerHTML = '<p class="error">Could not load content. Please refresh the page.</p>';
-                    console.error('Could not find #raw-content in the fetched HTML');
+                    // Fallback: Assume the fetched text is markdown directly
+                    document.getElementById('content').innerHTML = marked.parse(html);
                 }
             })
             .catch(error => {
